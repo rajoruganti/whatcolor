@@ -24,7 +24,7 @@ var Server = mongo.Server,
 	    if(!err) {
 	        console.log("Connected to 'whatcolor' database");
 			if(process.env.NODE_ENV != "development"){
-				db.admin().authenticate('admin', 'lcRsVDrK7RNg', function(de , db){
+				db.admin().authenticate('admin', 'b56RuQBlPeaw', function(de , db){
 				     if(de){
 				         console.log("could not authenticate");
 				     }else {
@@ -154,7 +154,8 @@ var Server = mongo.Server,
 				db.collection('colors', function(err, collection) {
 					collection.insert(xset, {safe:true}, function(err, result) {
 						if(err){
-							console.log("error saving to mongo")
+							console.log("error saving to mongo:"+err);
+							process.exit();
 						}
 						else{
 							console.log("saved request to db:"+result[0]._id);
