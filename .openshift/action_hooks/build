@@ -32,4 +32,4 @@ fi
 
 # install node.canvas
 echo "init canvas"
-(cd "${OPENSHIFT_REPO_DIR}"; export PKG_CONFIG_PATH="${OPENSHIFT_DATA_DIR}usr/local/lib"; echo $PKG_CONFIG_PATH; export LD_LIBRARY_PATH="${OPENSHIFT_DATA_DIR}usr/local/lib/pkgconfig"; pkg-config --libs cairo; echo $LD_LIBRARY_PATH; export PATH="/sbin":$PATH; echo $PATH; npm install canvas)
+(cd "${OPENSHIFT_REPO_DIR}"; export PKG_CONFIG_PATH="${OPENSHIFT_DATA_DIR}usr/local/lib/pkgconfig"; echo $PKG_CONFIG_PATH; export LD_LIBRARY_PATH="${OPENSHIFT_DATA_DIR}usr/local/lib"; pkg-config --libs cairo; echo $LD_LIBRARY_PATH; export PATH="/sbin":$PATH; echo $PATH; npm install canvas)
