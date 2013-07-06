@@ -30,3 +30,6 @@ if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
    (cd "${OPENSHIFT_REPO_DIR}"; export TMPDIR="/tmp"; npm install -d)
 fi
 
+# install node.canvas
+echo
+(cd "${OPENSHIFT_REPO_DIR}"; export PKG_CONFIG_PATH="${OPENSHIFT_DATA_DIR}/usr/local/lib"; export LD_LIBRARY_PATH="${OPENSHIFT_DATA_DIR}/usr/local/lib":$LD_LIBRARY_PATH; export PATH="/sbin":$PATH; npm install canvas)

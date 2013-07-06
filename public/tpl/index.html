@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Promo{% endblock %}</title>
+
+  {% block head %}
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Whatcolor</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Raj Oruganti">
+	<!-- Date: 2013-06-01 -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://use.edgefonts.net/andika.js"></script>
+    <script src="http://use.edgefonts.net/arvo.js"></script>
+  {% endblock %}
+	{% block extrahead%}
+	{% endblock %}
+</head>
+<body>
+	{% block header %} 
+		<div class="header">
+			<div class="navbar navbar-inverse navbar-fixed-top" style="z-index: 10;">
+			    <div class="navbar-inner">
+			        <div class="container">
+			            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			                <span class="icon-bar"></span>
+			                <span class="icon-bar"></span>
+			                <span class="icon-bar"></span>
+			            </a>
+			            <a class="brand" href="/">whatcolor</a>
+						
+
+			            
+			        </div>
+			    </div>
+			</div>
+			<!-- How Modal -->
+			<div id="howItWorks" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="howItWorksLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="myModalLabel">How it works</h3>
+			  </div>
+			  <div class="modal-body">
+			    <p>
+			    	<ul>
+			    		<li>
+			    			- fetch screenshot from urlshot.toyroute.com 
+							- run it through palette to get dominant colors
+							- use chromath to blend them
+							- output color in box
+			    		</li>
+					
+
+			    	</ul>
+			    </p>
+			  </div>
+			  <div class="modal-footer">
+			    <button class="btn" data-dismiss="modal" aria-hidden="true">OK. Got it.</button>
+			  </div>
+			</div>
+			<!-- About Modal -->
+			<div id="about" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="howItWorksLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="myModalLabel">About</h3>
+			  </div>
+			  <div class="modal-body">
+			    <p>
+			    	What does the world look like today?
+				</p>
+			  </div>
+
+			</div>
+		</div>
+	
+	{% endblock %} <!-- end header-->
+	
+		<div class="container-fluid ">
+		          
+		    <div>
+	
+	{% block content %}
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<div id="colorbox" class="span7 center">{{color}}</div>
+					<form class="form-search">
+					
+						
+						<!--input type="checkbox" class="checkbox" id="thumbnail" name="thumbnail">Thumbnail</input>
+						<br/-->
+						<!--button type="submit" class="btn">Try again</button-->
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+	{% endblock %}
+	</div>
+	</div>
+	<script src="lib/jquery-1.8.2.min.js"></script>
+	<script src="lib/knockout-2.2.1.js"></script>
+	<script src="lib/bootstrap.min.js"></script>
+	<script src="lib/jquery.blockUI.js"></script>
+	<script src="lib/bootstrap-maxlength.min.js"></script>
+	<script type="text/javascript">
+			ko.bindingHandlers.stopBinding = {
+			    init: function() {
+			        return { controlsDescendantBindings: true };
+			    }        
+			};
+
+			//KO 2.1, now allows you to add containerless support for custom bindings
+			ko.virtualElements.allowedBindings.stopBinding = true;
+
+			var data = [];   
+
+			var ColorviewModel = {
+
+				color : ko.observable(),
+				
+
+			};
+			
+		
+
+		ko.applyBindings(ColorviewModel);
+		$(document).ready(function(){
+			$("#colorbox").css('background-color', '{{color}}');
+			$(".screenshot").hide();
+			$(".errors").hide();
+		
+			$('.form-search').live('submit', function(e){
+					$(".screenshot").hide();
+					$(".errors").hide();
+					e.preventDefault();
+					$.blockUI({ message: "<i class=\"icon-spinner icon-spin icon-large\"></i> grabbing..." });
+					var url = $(this).find('input[name="url"]').val();
+					console.log(url);
+				//	if (url && !url.match(/^http([s]?):\/\/.*/)) {
+				//	    url = 'http://' + url;
+				//	  }
+				
+					var thumbnail = false;
+					if ($("#thumbnail").is(":checked")) {  
+					    thumbnail = true;
+					} 
+			        $.ajax({
+						type: "POST",
+			            url: '/shoot/',
+						data: {'url':url,'thumbnail':thumbnail},
+						beforeSend: function(data){
+						},
+						error: function(data){
+							console.log("error");
+							console.log(data);
+						},
+			            success: function (data) {
+							$.unblockUI();
+							console.log(data);
+							
+							if(data.status == "1"){
+								$("#timeout").show();
+							}
+							else if(data.status == "0"){
+								$("#error").show();
+							}
+							else{
+								$(".screenshot").show();
+							}
+							
+			            }
+			        });
+			});
+		});
+		
+			
+	
+	      
+	</script>
+	
+	
+	
+	{% block footer %} 
+	{% endblock %}
+</body>
+</html>
