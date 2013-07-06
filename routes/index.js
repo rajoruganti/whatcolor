@@ -17,6 +17,14 @@ var colors,
 theColor="#fff";
 
 //db
+/*
+Added mongodb-2.2 to application whatcolor
+MongoDB 2.2 database added.  Please make note of these credentials:
+   Root User:     admin
+   Root Password: b56RuQBlPeaw
+   Database Name: whatcolor
+Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
+*/
 var mongo = require('mongodb');
 var Server = mongo.Server,
 	Db = mongo.Db,
@@ -29,7 +37,7 @@ var Server = mongo.Server,
 	    if(!err) {
 	        console.log("Connected to 'whatcolor' database");
 			if(process.env.NODE_ENV != "development"){
-				db.admin().authenticate('admin', 'lcRsVDrK7RNg', function(de , db){
+				db.admin().authenticate('admin', 'b56RuQBlPeaw', function(de , db){
 				     if(de){
 				         console.log("could not authenticate");
 				     }else {
