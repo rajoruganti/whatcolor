@@ -43,9 +43,9 @@ var Server = mongo.Server,
 	db = new Db('whatcolor', server);
 	db.open(function(err, db) {
 	    if(!err) {
-	        console.log("Connected to 'whatcolor' database");
-			if(process.env.NODE_ENV != "development"){
-				db.admin().authenticate('admin', 'b56RuQBlPeaw', function(de , db){
+	        console.log("Connected to 'whatcolor' database on:"+process.env.NODE_ENV);
+			if(process.env.NODE_ENV == "production"){
+				db.admin().authenticate(dbUser, dbPass, function(de , db){
 				     if(de){
 				         console.log("could not authenticate");
 				     }else {
