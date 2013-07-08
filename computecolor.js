@@ -70,7 +70,7 @@ var Server = mongo.Server,
 //		console.log("fetching shot for:"+moodUrl);
 			request({ method: 'POST' ,uri: u, body:"url="+moodUrl,headers: {'User-Agent': ua, 'content-type' : 'application/x-www-form-urlencoded'}}, function (error, response, body) {
 				if (error) return next(error);
-				 
+				 //console.log(body);
 					//store the retreived text in a var
 					var obj = JSON.parse(body);
 					imgUrl = obj.shot;	
@@ -147,7 +147,14 @@ var Server = mongo.Server,
 				//theColor = Chromath.additive(theColors[0],theColors[1],theColors[2]).toString();
 				theColor = addColors(pageColors);
 				console.log("and finally:"+theColor+" from:"+colorSet);
-				// TODO: save the colors to mongo
+				// delete the files
+				for(var name in imgPaths){
+					fs.unlink(imgPaths[name], function (err) {
+					  if (err) throw err;
+					  console.log('successfully deleted:'+imgPaths[name]);
+					});
+				}
+				
 				var xset = [
 					{"colors":theColors, "color":theColor, "timestamp":timestamp},
 				];
