@@ -83,7 +83,7 @@ var Server = mongo.Server,
 					
 					
 					imgPaths[name] = imgDir+name+"_"+timestamp+".png";
-//					console.log("fetching image:"+imgUrl+" - and saving to:"+imgPaths[name]);
+					console.log("fetching image:"+imgUrl+" - and saving to:"+imgPaths[name]);
 					var r = request(imgUrl).pipe(fs.createWriteStream(imgPaths[name]));
 					r.on('close', function(){
 						
