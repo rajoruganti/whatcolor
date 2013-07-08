@@ -149,6 +149,8 @@
 
 		// "add" rectangle onto canvas
 		canvas.add(rect);
+		rect.lockMovementX = rect.lockMovementY = rect.lockScalingX = rect.lockScalingY = rect.lockUniScaling = rect.lockRotation = true;
+			rect.selectable = false;
 	/*	var circle = new fabric.Circle({
 		  radius: 5+{{loop.index}}, fill: '{{color.color}}', left: 1+{{loop.index}}*25, top: 100
 		});
