@@ -81,27 +81,27 @@ exports.home = function(req,res){
 	  extensions: {},
 	  tzOffset: 0
 	});
-	var colorNow;
+	var colors, colorNow;
 	async.series([
 		function(callback){
 			db.collection('colors', function(err, collection) {
-				collection.find().sort({timestamp:-1}).limit(1).toArray(function(err,items){
+				collection.find().sort({timestamp:-1}).limit(12).toArray(function(err,items){
 					if(err){
 						console.log(err);
 						res.send("error fetching color");
 						callback();
 					}
-					colorNow=items[0];
+					colors=items;
 					callback();
 				});
 			});
 		}
 	],function(err,result){
-		console.log(colorNow);
-		console.log(colorNow.color);
+		console.log(colors);
+		console.log(colors[0].color);
 		var tmpl = template.compileFile(tplPath+'index.html');
 		renderedHTML= tmpl.render({
-			color:colorNow.color
+			colors:colors
 		});
 		res.send(renderedHTML);
 	});

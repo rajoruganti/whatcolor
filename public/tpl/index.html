@@ -99,7 +99,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="span12">
-					<div id="colorbox" class="span7 center">{{color}}</div>
+					<div id="colorbox" class="span7 center">
+
+						<div class="color">
+							{% for color in colors %}
+							<span style="color:{{color.color}}">{{color.color}}</span>
+							{% endfor %}
+						<canvas id="colors" ></canvas>
+						    
+						</div>
+					</div>
+					<div id="col"></div>
 					<form class="form-search">
 					
 						
@@ -120,6 +130,24 @@
 	<script src="lib/bootstrap.min.js"></script>
 	<script src="lib/jquery.blockUI.js"></script>
 	<script src="lib/bootstrap-maxlength.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.2.0/fabric.all.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		// create a wrapper around native canvas element (with id="c")
+		var canvas = new fabric.Canvas('colors');
+
+		{% for color in colors %}
+		var circle = new fabric.Circle({
+		  radius: 20, fill: '{{color.color}}', left: 100+{{loop.index}}*20, top: 100
+		});
+		canvas.add(circle);
+		{% endfor %}
+		//angle: 45
+
+		canvas.renderAll();
+	});
+    </script>
+	   
 	<script type="text/javascript">
 			ko.bindingHandlers.stopBinding = {
 			    init: function() {
@@ -134,7 +162,7 @@
 
 			var ColorviewModel = {
 
-				color : ko.observable(),
+				colors : ko.observableArray(),
 				
 
 			};
