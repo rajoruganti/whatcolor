@@ -21,17 +21,14 @@ theColor="#fff";
 Added mongodb-2.2 to application whatcolor
 MongoDB 2.2 database added.  Please make note of these credentials:
    Root User:     admin
-   Root Password: b56RuQBlPeaw
+   Root Password: C-apTvaM76an
    Database Name: whatcolor
 Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
 */
 /*
 rockmongo-1.1: URL: https://whatcolor-cod3.rhcloud.com/rockmongo/
 
-rockmongo-1.1 added.  Please make note of these MongoDB credentials again:
-   RockMongo User    : admin
-   RockMongo Password: b56RuQBlPeaw
-URL: https://whatcolor-cod3.rhcloud.com/rockmongo/
+
 */
 var mongo = require('mongodb');
 var Server = mongo.Server,
