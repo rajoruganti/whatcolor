@@ -103,7 +103,7 @@
 
 						<div class="color">
 							{% for color in colors %}
-							<span style="color:{{color.color}}">{{color.color}}</span>
+							<span style="color:{{color.color}}">{{color.timestamp}}</span>
 							{% endfor %}
 						<canvas id="colors" ></canvas>
 						    
@@ -135,12 +135,37 @@
 	$(document).ready(function(){
 		// create a wrapper around native canvas element (with id="c")
 		var canvas = new fabric.Canvas('colors');
-
+		canvas.setHeight(500);
+		canvas.setWidth(800);
+		
 		{% for color in colors %}
-		var circle = new fabric.Circle({
-		  radius: 20, fill: '{{color.color}}', left: 100+{{loop.index}}*20, top: 100
+		var rect = new fabric.Rect({
+		  left: 1+{{loop.index}}*25, 
+		  top: 100,
+		  fill: '{{color.color}}',
+		  width: 20,
+		  height: 50+{{loop.index}}*3
+		});
+
+		// "add" rectangle onto canvas
+		canvas.add(rect);
+	/*	var circle = new fabric.Circle({
+		  radius: 5+{{loop.index}}, fill: '{{color.color}}', left: 1+{{loop.index}}*25, top: 100
+		});
+		circle.lockMovementX = circle.lockMovementY = circle.lockScalingX = circle.lockScalingY = circle.lockUniScaling = circle.lockRotation = true;
+		circle.selectable = false;
+		circle.setGradientFill({
+		  x1: 0,
+		  y1: circle.height / 2,
+		  x2: circle.width,
+		  y2: circle.height / 2,
+		  colorStops: {
+		    0: "{{color.color}}",
+		    1: "red"
+		  }
 		});
 		canvas.add(circle);
+		*/
 		{% endfor %}
 		//angle: 45
 
