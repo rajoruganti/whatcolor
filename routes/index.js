@@ -34,6 +34,7 @@ var mongo = require('mongodb');
 var Server = mongo.Server,
 	Db = mongo.Db,
 	BSON = mongo.BSONPure;
+	console.log("env.node_env="+process.env.NODE_ENV);
 	var dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
 	var dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;	
 	server = new Server(process.env.OPENSHIFT_MONGODB_DB_HOST||'localhost', process.env.OPENSHIFT_MONGODB_DB_PORT||27017, {auto_reconnect: true});
@@ -59,7 +60,7 @@ var Server = mongo.Server,
 	        });
 	    }
 		else{
-			console.log("error connecting to mongo - returning ");
+			console.log("error connecting to mongo - returning:"+err);
 			//res.send("No db");
 		}
 	});

@@ -23,8 +23,10 @@ Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
 var Server = mongo.Server,
 	Db = mongo.Db,
 	BSON = mongo.BSONPure;
+	console.log("env.node_env="+process.env.NODE_ENV);
 	var dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
 	var dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;	
+	console.log(dbUser, dbPass);
 	server = new Server(process.env.OPENSHIFT_MONGODB_DB_HOST||'localhost', process.env.OPENSHIFT_MONGODB_DB_PORT||27017, {auto_reconnect: true});
 	db = new Db('whatcolor', server);
 	db.open(function(err, db) {
@@ -48,7 +50,7 @@ var Server = mongo.Server,
 	        });
 	    }
 		else{
-			console.log("error connecting to mongo - returning ");
+			console.log("error connecting to mongo - returning:"+err);
 			//res.send("No db");
 		}
 	});
