@@ -28,7 +28,7 @@ var Server = mongo.Server,
 	var dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;	
 	console.log(dbUser, dbPass);
 	server = new Server(process.env.OPENSHIFT_MONGODB_DB_HOST||'localhost', process.env.OPENSHIFT_MONGODB_DB_PORT||27017, {auto_reconnect: true});
-	db = new Db('whatcolor', server);
+	db = new Db('whatcolor', server,{w:1});
 	db.open(function(err, db) {
 	    if(!err) {
 	        console.log("Connected to 'whatcolor' database");
@@ -146,7 +146,7 @@ var Server = mongo.Server,
 				//theColor=Chromath.additive('#F00', '#0F0').toString();
 				var colorSet=theColors;
 				//console.log("before:"+theColors);
-				var pageColors=[];
+				var pageColors=["#ffffff"];
 				for(var key in theColors) {
 					console.log("key " + key + " has value " + theColors[key]);
 				    pageColors.push(theColors[key]);
