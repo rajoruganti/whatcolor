@@ -30,6 +30,7 @@ rockmongo-1.1: URL: https://whatcolor-cod3.rhcloud.com/rockmongo/
 
 
 */
+//new Db(new Server('localhost', 27017), {w: 1})
 var mongo = require('mongodb');
 var Server = mongo.Server,
 	Db = mongo.Db,
@@ -38,7 +39,7 @@ var Server = mongo.Server,
 	var dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
 	var dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;	
 	server = new Server(process.env.OPENSHIFT_MONGODB_DB_HOST||'localhost', process.env.OPENSHIFT_MONGODB_DB_PORT||27017, {auto_reconnect: true});
-	db = new Db('whatcolor', server);
+	db = new Db('whatcolor', server, {w:1});
 	db.open(function(err, db) {
 	    if(!err) {
 	        console.log("Connected to 'whatcolor' database on:"+process.env.NODE_ENV);
