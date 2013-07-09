@@ -83,7 +83,7 @@ exports.home = function(req,res){
 	async.series([
 		function(callback){
 			db.collection('colors', function(err, collection) {
-				collection.find().sort({timestamp:-1}).limit(12).toArray(function(err,items){
+				collection.find().sort({timestamp:1}).limit(12).toArray(function(err,items){
 					if(err){
 						console.log(err);
 						res.send("error fetching color");
