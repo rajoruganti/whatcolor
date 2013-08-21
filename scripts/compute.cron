@@ -1,6 +1,6 @@
 #!/bin/bash
-#export LD_LIBRARY_PATH=$OPENSHIFT_DATA_DIR/usr/local/lib
-#export NODE_ENV="production"
+export LD_LIBRARY_PATH=/usr/lib
+export NODE_ENV="production"
 MIN=`date +%M`
 if [ $((${MIN#0} % 10)) == 0 ]; then
     echo "computing"
