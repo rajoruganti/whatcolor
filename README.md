@@ -1,7 +1,7 @@
 <p>Find a single color that most accurately represents the moment</p>
 <p>Each rectangle is colored with the 'color' of the news at a point in time. Currently monitoring 6 news services (most times!):
 	
-	See the color now at http://whatcolor.toyroute.com
+
 	
 	<a href="https://twitter.com/abc/media/grid">ABC</a>,
 <a href="https://twitter.com/reuters/media/grid">Reuters</a>,
@@ -21,3 +21,5 @@
 <a href="https://github.com/mikeal/request">Request</a>,
 <a href="urlshot.toyroute.com">Urlshot</a>,
 and <a href="http://www.mongodb.org/">MongoDB</a>
+
+<p>	See the color now at http://whatcolor.toyroute.com</p>
