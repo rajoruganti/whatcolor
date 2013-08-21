@@ -5,7 +5,7 @@ export NODE_ENV="production"
 #if [ $((${MIN#0} % 10)) == 0 ]; then
     echo "computing"
    # $OPENSHIFT_DATA_DIR/node-v0.9.1-linux-x64/bin/node $OPENSHIFT_REPO_DIR/computecolor.js
-	node /opt/whatcolor/computecolor.js
+	/usr/local/bin/node /opt/whatcolor/computecolor.js
 #else
 #    echo "not computing"
 #fi
