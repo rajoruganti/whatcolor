@@ -167,32 +167,32 @@
 		var path = new Path();
 		// Give the stroke a color
 		path.strokeColor = '{{color.color}}';
-		path.strokeWidth = 10;
+		path.strokeWidth = 20;
 
 		path.strokeCap = 'round';
 	
-		var firstPoint = new Point(0, 100);
+		var firstPoint = new Point(100, 300);
 		path.add(firstPoint);
 
-		var throughPoint = new Point(100+{{loop.index}}*20, 1000);
+		/*var throughPoint = new Point(100+{{loop.index}}*100, 1000);
 		var toPoint = new Point(100, 200);
 		path.arcTo(throughPoint, toPoint);
 		//	path.fullySelected = true;
-
+*/
 		//var circle = new Path.Circle(throughPoint, 5);
 		//circle.fillColor = '#CC0000';
 		
-		//var start = new Point(100+{{loop.index}}*10, 100);
+		var start = new Point(75, 200);
 		// Move to start and draw a line from there
-		//path.moveTo(start);
+		path.moveTo(start);
 		// Note the plus operator on Point objects.
 		// PaperScript does that for us, and much more!
-		//path.lineTo(start + [ 0, 	100 ]);
+		path.lineTo(start + [ 30*{{loop.index}}, 	150+{{loop.index}} ]);
 		//path.add(new Point(0, 0), new Point(100, 50));
 
 		// insert a segment between the two existing
 		// segments in the path:
-		//path.insert(1, new Point(30, 40));
+	//	path.insert(1, new Point(30, 40));
 		{% endfor %}
 	</script>
 
