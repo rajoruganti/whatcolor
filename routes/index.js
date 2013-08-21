@@ -18,10 +18,9 @@ theColor="#fff";
 
 //db
 /*
-Added mongodb-2.2 to application whatcolor
 MongoDB 2.2 database added.  Please make note of these credentials:
    Root User:     admin
-   Root Password: C-apTvaM76an
+   Root Password: vS1PmsvTzibx
    Database Name: whatcolor
 Connection URL: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/
 */
@@ -39,7 +38,7 @@ var Server = mongo.Server,
 	var dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
 	var dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;	
 	server = new Server(process.env.OPENSHIFT_MONGODB_DB_HOST||'localhost', process.env.OPENSHIFT_MONGODB_DB_PORT||27017, {auto_reconnect: true});
-	db = new Db('whatcolor', server, {w:1});
+	db = new Db('whatcolor', server);
 	db.open(function(err, db) {
 	    if(!err) {
 	        console.log("Connected to 'whatcolor' database on:"+process.env.NODE_ENV);
@@ -91,13 +90,19 @@ exports.home = function(req,res){
 						callback();
 					}
 					colors=items;
+					colors.forEach(function(color){
+						var iso = color._id.getTimestamp();
+						console.log(iso);
+						color.iso=iso;
+					});
+	
 					callback();
 				});
 			});
 		}
 	],function(err,result){
 		console.log(colors);
-		console.log(colors[0].color);
+		//console.log(colors[0].color);
 		var tmpl = template.compileFile(tplPath+'index.html');
 		renderedHTML= tmpl.render({
 			colors:colors
