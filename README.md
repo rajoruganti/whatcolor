@@ -22,4 +22,4 @@
 <a href="urlshot.toyroute.com">Urlshot</a>,
 and <a href="http://www.mongodb.org/">MongoDB</a>
 
-<p>	See the color now at http://whatcolor.toyroute.com</p>
+<p>	See the color now at http://whatcolor.toyroute.com:8000</p>
